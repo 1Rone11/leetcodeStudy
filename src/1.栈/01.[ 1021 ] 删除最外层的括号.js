@@ -1,7 +1,7 @@
 /*
  * @Author: Zkiki
  * @Date: 2023-01-02 15:57:03
- * @LastEditTime: 2023-01-02 15:58:08
+ * @LastEditTime: 2023-01-04 08:48:18
  * @LastEditors: Please set LastEditors
  * @FilePath: \leetcodeStudy\src\1.栈\01.[ 1021 ] 删除最外层的括号.js
  * @Description: 
@@ -12,7 +12,18 @@
  */
 
 // * 思路：从头到尾寻找有效括号组合，push 到结果集中
-
+const removeOuterParentheses = (s) => {
+    debugger
+    let res = '';
+    const stack = [];
+    for (let i = 0; i <= s.length; i++) {
+        const c = s[i];
+        if (c === ')') stack.pop();
+        if (stack.length) res += c
+        if (c === '(') stack.push();
+    }
+    return res
+}
 
 // 测试用例
 let test = "(()())(())"
