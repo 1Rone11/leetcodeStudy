@@ -1,9 +1,9 @@
 /*
  * @Author: Zkiki
  * @Date: 2023-01-02 15:57:03
- * @LastEditTime: 2023-02-07 22:53:27
+ * @LastEditTime: 2023-02-07 23:03:48
  * @LastEditors: Please set LastEditors
- * @FilePath: \leetcodeStudy\src\1.栈\15.[ 剑指 Offer 59 - I ] 滑动窗口的最大值.js
+ * @FilePath: \leetcodeStudy\src\1.栈\15.改题-找出滑动窗口之和最大值.js
  * @Description: 
  */
 /**
@@ -33,16 +33,21 @@
  */
 const maxSlidingWindow = function (nums, k) {
     let sumStack = [];
+    let windowArr = []
     nums.forEach((item, index) => {
         if (index <= nums.length - k) {
-            let sum = 0;
-            for (let i = 0; i < k; i++){
-                sum += nums[index + i]
+            for (let i = 0; i < k; i++) {
+                windowArr.push(nums[index + i])
             }
-            sumStack.push(sum)
+        
+        const maxItem = Math.max(...windowArr)
+        while (windowArr.length) {
+            windowArr.pop()
         }
+        sumStack.push(maxItem)
+    }
     })
-    return Math.max(...sumStack)
+    return sumStack
 };
 
 
