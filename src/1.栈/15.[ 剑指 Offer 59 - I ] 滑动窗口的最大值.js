@@ -1,7 +1,7 @@
 /*
  * @Author: Zkiki
  * @Date: 2023-01-02 15:57:03
- * @LastEditTime: 2023-02-07 22:53:27
+ * @LastEditTime: 2023-02-11 16:47:20
  * @LastEditors: Please set LastEditors
  * @FilePath: \leetcodeStudy\src\1.栈\15.[ 剑指 Offer 59 - I ] 滑动窗口的最大值.js
  * @Description: 
@@ -32,17 +32,26 @@
  * @return {number[]}
  */
 const maxSlidingWindow = function (nums, k) {
-    let sumStack = [];
-    nums.forEach((item, index) => {
-        if (index <= nums.length - k) {
-            let sum = 0;
-            for (let i = 0; i < k; i++){
-                sum += nums[index + i]
-            }
-            sumStack.push(sum)
+    let res = [] // 结果队列
+    let dque = [] // 单调窗口队列
+    const n = nums.length;
+    let left = 0;
+    let right = 0;
+    while (right < n) {//保证窗口右边不超过数据最右侧
+        while (dque.length && dque[dque.length - 1] < nums[right]) {
+            // 确保窗口的最后一个值一定要是最大的
+            dque.pop()
         }
-    })
-    return Math.max(...sumStack)
+        dque.push(nums[right])
+        right++
+
+        if (right >= k) {
+            res.push(dque[0]);
+            if (dque[0] === nums[left]) dque.shift() // 理解
+            left++
+        }
+    }
+    return res
 };
 
 

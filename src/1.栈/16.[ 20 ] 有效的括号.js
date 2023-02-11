@@ -21,6 +21,8 @@
 //   遇到右括号（进行判断是否和栈顶的左括号相同）-->将左括号出栈
 
 
+//可以定义map哈希表使用map.has()和map.get()方法来找到匹配的括号 不需要这么多if else
+
 /**
  * @param {string} s
  * @return {boolean}
@@ -40,7 +42,7 @@ const isValid = function (s) {
                 inStack.pop()
             } else if (item === '}' && inStack[inStack.length - 1] === '{' && inStack.length) {
                 inStack.pop()
-            }else{
+            } else {
                 inStack.push(item)
             }
         } else {
